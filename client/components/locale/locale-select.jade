@@ -1,0 +1,5 @@
+select.locale-select.form-control(
+ng-if="visible",
+ng-model="locale",
+ng-options="locale.display for locale in locales",
+ng-change="changeLocale(locale.name)")
