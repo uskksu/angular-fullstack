@@ -12,7 +12,7 @@ angular.module('angularFullstackApp')
     }
   ])
 
-  .factory('locale', function ($translate, $rootScope, $log, tmhDynamicLocale, LOCALES) {
+  .factory('Locale', function ($translate, $log, tmhDynamicLocale, LOCALES) {
 
     if (!LOCALES || LOCALES.length === 0) {
       $log.error('There are no _LOCALES provided');
@@ -28,32 +28,30 @@ angular.module('angularFullstackApp')
       return result;
     };
 
-    var currentLocaleName;
     var setLocaleByName = function (localeName) {
       if (angular.isUndefined(getLocaleByName(localeName))) {
         $log.error('Locale name "' + localeName + '" is invalid');
         return;
       }
-      currentLocaleName = localeName;
-      document.documentElement.setAttribute('lang', currentLocaleName);
-      $translate.use(currentLocaleName);
-      tmhDynamicLocale.set(currentLocaleName.toLowerCase().replace(/_/g, '-'));
+      document.documentElement.setAttribute('lang', localeName);
+      $translate.use(localeName);
+      tmhDynamicLocale.set(localeName.toLowerCase().replace(/_/g, '-'));
     };
-    setLocaleByName($translate.use());
-
-    //$rootScope.$on('$translateChangeSuccess', function (event, data) {
-    //  document.documentElement.setAttribute('lang', data.language);
-    //  tmhDynamicLocale.set(data.language.toLowerCase().replace(/_/g, '-'));
-    //});
 
     return {
       getLocales: function () {
         return LOCALES;
       },
       getCurrentLocale: function () {
-        return getLocaleByName(currentLocaleName);
+        return getLocaleByName($translate.use());
       },
       setLocaleByName: setLocaleByName
     };
 
+  })
+
+  .run(function ($rootScope, Locale, Scopes) {
+    Scopes.once($rootScope, '$translateChangeSuccess', function (event, data) {
+      Locale.setLocaleByName(data.language);
+    });
   });

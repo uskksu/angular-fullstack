@@ -26,7 +26,8 @@ angular.module('angularFullstackApp', [
       })
       .preferredLanguage('ja_JP')
       .useLocalStorage()
-      .useMissingTranslationHandlerLog();
+      .useMissingTranslationHandlerLog()
+      .useSanitizeValueStrategy('escaped');
   })
 
   .config(function (tmhDynamicLocaleProvider) {
