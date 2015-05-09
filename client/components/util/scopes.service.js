@@ -9,7 +9,7 @@ angular.module('angularFullstackApp')
     return {
 
       /**
-       * 指定されたイベントに一度だけ実行するリスナを登録してします。
+       * 指定されたイベントに一度だけ実行されるリスナを登録します。
        *
        * @param scope    スコープ
        * @param name     イベント名
