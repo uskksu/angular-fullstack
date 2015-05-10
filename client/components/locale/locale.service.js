@@ -12,14 +12,14 @@ angular.module('angularFullstackApp')
     }
   ])
 
-  .factory('Locale', function ($translate, $log, tmhDynamicLocale, LOCALES) {
+  .factory('Locale', function ($translate, $log, tmhDynamicLocale, LOCALES, lodash) {
 
     if (!LOCALES || LOCALES.length === 0) {
       $log.error('There are no _LOCALES provided');
     }
 
     var getLocaleByName = function (localeName) {
-      var result;
+      var result = null;
       angular.forEach(LOCALES, function (locale) {
         if (locale.name === localeName) {
           result = locale;
@@ -29,11 +29,11 @@ angular.module('angularFullstackApp')
     };
 
     var setLocaleByName = function (localeName) {
-      if (angular.isUndefined(getLocaleByName(localeName))) {
+      if (!getLocaleByName(localeName)) {
         $log.error('Locale name "' + localeName + '" is invalid');
         return;
       }
-      document.documentElement.setAttribute('lang', localeName);
+      angular.element('html').attr('lang', localeName);
       $translate.use(localeName);
       tmhDynamicLocale.set(localeName.toLowerCase().replace(/_/g, '-'));
     };
