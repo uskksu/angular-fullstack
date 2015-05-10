@@ -19,17 +19,13 @@ angular.module('angularFullstackApp')
     }
 
     var getLocaleByName = function (localeName) {
-      var result = null;
-      angular.forEach(LOCALES, function (locale) {
-        if (locale.name === localeName) {
-          result = locale;
-        }
+      return lodash.find(LOCALES, function (locale) {
+        return locale.name === localeName;
       });
-      return result;
     };
 
     var setLocaleByName = function (localeName) {
-      if (!getLocaleByName(localeName)) {
+      if (angular.isUndefined(getLocaleByName(localeName))) {
         $log.error('Locale name "' + localeName + '" is invalid');
         return;
       }

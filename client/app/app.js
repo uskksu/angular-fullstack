@@ -8,7 +8,8 @@ angular.module('angularFullstackApp', [
   'ui.router',
   'ui.bootstrap',
   'pascalprecht.translate',
-  'tmh.dynamicLocale'
+  'tmh.dynamicLocale',
+  'ngLodash'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider

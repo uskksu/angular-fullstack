@@ -6,6 +6,7 @@ angular.module('angularFullstackApp')
       restrict: 'A',
       replace: true,
       templateUrl: 'components/locale/locale-select.html',
+
       controller: function ($scope) {
 
         $scope.locale  = Locale.getCurrentLocale();
