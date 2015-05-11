@@ -11,6 +11,18 @@ angular.module('angularFullstackApp', [
   'tmh.dynamicLocale',
   'ngLodash'
 ])
+
+  .constant('LOCALES', [
+    {
+      name: 'ja_JP',
+      display: '日本語',
+      preferred: true
+    }, {
+      name: 'en_US',
+      display: 'English'
+    }
+  ])
+
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
     $urlRouterProvider
       .otherwise('/');
@@ -19,13 +31,21 @@ angular.module('angularFullstackApp', [
     $httpProvider.interceptors.push('authInterceptor');
   })
 
-  .config(function ($translateProvider) {
+  .config(function ($translateProvider, LOCALES) {
+
+    var preferredLocale = LOCALES[0];
+    angular.forEach(LOCALES, function (locale) {
+      if (locale.preferred === true) {
+        preferredLocale = locale;
+      }
+    });
+
     $translateProvider
       .useStaticFilesLoader({
         prefix: 'assets/i18n/locale-',
         suffix: '.json'
       })
-      .preferredLanguage('ja_JP')
+      .preferredLanguage(preferredLocale.name)
       .useLocalStorage()
       .useMissingTranslationHandlerLog()
       .useSanitizeValueStrategy('escaped');

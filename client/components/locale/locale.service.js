@@ -2,16 +2,6 @@
 
 angular.module('angularFullstackApp')
 
-  .constant('LOCALES', [
-    {
-      name: 'ja_JP',
-      display: '日本語'
-    }, {
-      name: 'en_US',
-      display: 'English'
-    }
-  ])
-
   .factory('Locale', function ($rootScope, $q, $translate, $log, tmhDynamicLocale, lodash, LOCALES, Scopes) {
 
     var deferred_getLocales = $q.defer();
