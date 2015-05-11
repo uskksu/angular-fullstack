@@ -9,9 +9,14 @@ angular.module('angularFullstackApp')
 
       controller: function ($scope) {
 
-        $scope.locale  = Locale.getCurrentLocale();
-        $scope.locales = Locale.getLocales();
-        $scope.visible = $scope.locales && $scope.locales.length > 1;
+        Locale.getCurrentLocale().then(function (currentLocale) {
+          $scope.locale = currentLocale;
+        });
+
+        Locale.getLocales().then(function (locales) {
+          $scope.locales = locales;
+          $scope.visible = locales.length > 1;
+        });
 
         $scope.changeLocale = function (localeName) {
           Locale.setLocaleByName(localeName);

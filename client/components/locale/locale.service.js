@@ -12,11 +12,21 @@ angular.module('angularFullstackApp')
     }
   ])
 
-  .factory('Locale', function ($translate, $log, tmhDynamicLocale, LOCALES, lodash) {
+  .factory('Locale', function ($rootScope, $q, $translate, $log, tmhDynamicLocale, lodash, LOCALES, Scopes) {
 
-    if (!LOCALES || LOCALES.length === 0) {
-      $log.error('There are no _LOCALES provided');
-    }
+    var deferred_getLocales = $q.defer();
+    var deferred_getCurrentLocale = $q.defer();
+
+    var initialize = function () {
+      if (!LOCALES || LOCALES.length === 0) {
+        $log.error('There are no _LOCALES provided');
+      }
+      Scopes.once($rootScope, '$translateChangeSuccess', function (event, data) {
+        deferred_getLocales.resolve(LOCALES);
+        deferred_getCurrentLocale.resolve(getLocaleByName(data.language));
+        setLocaleByName(data.language);
+      });
+    };
 
     var getLocaleByName = function (localeName) {
       return lodash.find(LOCALES, function (locale) {
@@ -35,19 +45,18 @@ angular.module('angularFullstackApp')
     };
 
     return {
+      initialize: initialize,
+      setLocaleByName: setLocaleByName,
       getLocales: function () {
-        return LOCALES;
+        return deferred_getLocales.promise;
       },
       getCurrentLocale: function () {
-        return getLocaleByName($translate.use());
-      },
-      setLocaleByName: setLocaleByName
+        return deferred_getCurrentLocale.promise;
+      }
     };
 
   })
 
-  .run(function ($rootScope, Locale, Scopes) {
-    Scopes.once($rootScope, '$translateChangeSuccess', function (event, data) {
-      Locale.setLocaleByName(data.language);
-    });
+  .run(function (Locale) {
+    Locale.initialize();
   });
