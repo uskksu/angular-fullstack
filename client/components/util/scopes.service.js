@@ -17,12 +17,8 @@ angular.module('angularFullstackApp')
        */
       once: function (scope, name, listener) {
         var off = scope.$on(name, function () {
-          try {
-            listener.apply(null, arguments);
-
-          } finally {
-            off();
-          }
+          off();
+          listener.apply(null, arguments);
         });
       }
 
