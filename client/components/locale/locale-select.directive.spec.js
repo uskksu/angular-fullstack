@@ -1,18 +1,20 @@
 'use strict';
 
-describe('Service: localeSelect', function () {
+describe('Directive: localeSelect', function () {
 
-  // load the service's module
+  // load the directive's module
   beforeEach(module('angularFullstackApp'));
 
-  // instantiate service
-  var localeSelect;
-  beforeEach(inject(function (_localeSelect_) {
-    localeSelect = _localeSelect_;
+  var element,
+    scope;
+
+  beforeEach(inject(function ($rootScope) {
+    scope = $rootScope.$new();
   }));
 
-  it('should do something', function () {
-    expect(!!localeSelect).toBe(true);
-  });
-
+  it('should make hidden element visible', inject(function ($compile) {
+    element = angular.element('<locale-select></locale-select>');
+    element = $compile(element)(scope);
+    //expect(element[0].tagName).toBe('SELECT');
+  }));
 });

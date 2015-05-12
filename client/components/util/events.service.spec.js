@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: Locale', function () {
+describe('Service: Events', function () {
 
   // load the service's module
   beforeEach(module('angularFullstackApp'));
 
   // instantiate service
-  var Locale;
-  beforeEach(inject(function (_Locale_) {
-    Locale = _Locale_;
+  var Events;
+  beforeEach(inject(function (_Events_) {
+    Events = _Events_;
   }));
 
   it('should do something', function () {
-    expect(!!Locale).toBe(true);
+    expect(!!Events).toBe(true);
   });
 
 });

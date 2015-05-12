@@ -13,6 +13,10 @@ describe('Controller: MainCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function (_$httpBackend_, $controller, $rootScope) {
     $httpBackend = _$httpBackend_;
+
+    $httpBackend.whenGET(/.*/)
+      .respond(readJSON('client/assets/i18n/locale-ja_JP.json'));
+
     $httpBackend.expectGET('/api/things')
       .respond(['HTML5 Boilerplate', 'AngularJS', 'Karma', 'Express']);
 

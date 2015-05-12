@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: utils', function () {
+describe('Service: Scopes', function () {
 
   // load the service's module
   beforeEach(module('angularFullstackApp'));
 
   // instantiate service
-  var utils;
-  beforeEach(inject(function (_utils_) {
-    utils = _utils_;
+  var Scopes;
+  beforeEach(inject(function (_Scopes_) {
+    Scopes = _Scopes_;
   }));
 
   it('should do something', function () {
-    expect(!!utils).toBe(true);
+    expect(!!Scopes).toBe(true);
   });
 
 });

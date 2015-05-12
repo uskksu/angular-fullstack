@@ -14,24 +14,33 @@ module.exports = function(config) {
       'client/bower_components/jquery/dist/jquery.js',
       'client/bower_components/angular/angular.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
+      'client/bower_components/karma-read-json/karma-read-json.js',
       'client/bower_components/angular-resource/angular-resource.js',
       'client/bower_components/angular-cookies/angular-cookies.js',
       'client/bower_components/angular-sanitize/angular-sanitize.js',
-      'client/bower_components/angular-route/angular-route.js',
+      //'client/bower_components/angular-route/angular-route.js',
       'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-      'client/bower_components/lodash/dist/lodash.compat.js',
+      'client/bower_components/lodash/lodash.js',
       'client/bower_components/angular-socket-io/socket.js',
       'client/bower_components/angular-ui-router/release/angular-ui-router.js',
+      'client/bower_components/angular-translate/angular-translate.js',
+      'client/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js',
+      'client/bower_components/angular-translate-storage-cookie/angular-translate-storage-cookie.js',
+      'client/bower_components/angular-translate-storage-local/angular-translate-storage-local.js',
+      'client/bower_components/angular-translate-handler-log/angular-translate-handler-log.js',
+      'client/bower_components/angular-dynamic-locale/src/tmhDynamicLocale.js',
+      'client/bower_components/ng-lodash/build/ng-lodash.js',
       'client/app/app.js',
-      'client/app/app.coffee',
+      //'client/app/app.coffee',
       'client/app/**/*.js',
-      'client/app/**/*.coffee',
+      //'client/app/**/*.coffee',
       'client/components/**/*.js',
-      'client/components/**/*.coffee',
+      //'client/components/**/*.coffee',
       'client/app/**/*.jade',
       'client/components/**/*.jade',
-      'client/app/**/*.html',
-      'client/components/**/*.html'
+      //'client/app/**/*.html',
+      //'client/components/**/*.html',
+      {pattern: 'client/assets/i18n/*.json', included: false}
     ],
 
     preprocessors: {
@@ -60,7 +69,7 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+    autoWatch: true,
 
 
     // Start these browsers, currently available:
@@ -71,7 +80,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
